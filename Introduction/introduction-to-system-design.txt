@@ -1,0 +1,275 @@
+What is System Design?
+System Design is the process of planning how different components of a software system will work together to meet requirements, handle users and data, and remain scalable, reliable, and efficient.
+
+Why is System Design Important?
+System Design is important because it helps us build software that can handle growing users and data while remaining scalable, reliable, available, and efficient.
+
+
+What is System Design?
+
+System Design is the process of planning how different components of a software system will work together to meet requirements while remaining **scalable, reliable, available, and efficient**.
+
+When building a small application, we can often put everything together and run it on a single server. But as the number of users, requests, and amount of data increases, the system becomes more difficult to maintain and scale.
+
+This is where System Design becomes important.
+
+## Why is System Design Important?
+
+System Design helps us build software that can **handle growing users and data while remaining scalable, reliable, available, and efficient**.
+
+A system that works perfectly for 100 users may fail when it has to handle 1 million users. System Design helps us anticipate these challenges and choose appropriate architectural solutions.
+
+---
+
+# Evolution of Software Architecture
+
+Software architecture did not evolve simply because newer technologies were invented. It evolved because **the problems faced by software systems changed**.
+
+As applications gained more users, processed more data, and became more complex, engineers had to find new ways to improve scalability, performance, reliability, and deployment.
+
+The evolution can be broadly understood as:
+
+**Monolith → Scaling → Load Balancing → Caching → CDN/Edge → Cloud → Microservices → Event-Driven → Cloud-Native → AI-Native**
+
+These stages are not strict replacements for one another. Modern systems often use several of these approaches together.
+
+## 1. Monolithic Architecture
+
+In the beginning, applications were commonly built as a **single deployable application**.
+
+The business logic, APIs, authentication, and other functionality could all exist within one application and often share the same database.
+
+### Why was it useful?
+
+* Simple to develop
+* Simple to deploy
+* Easy to debug
+* Easy to understand for small teams
+
+For a small application, a monolith can still be an excellent choice. It is not inherently a bad architecture.
+
+### The problem
+
+As the application grows, the entire application may need to be scaled and deployed together. A change in one part of the system can also affect other parts.
+
+This creates pressure for the next stage of evolution.
+
+---
+
+## 2. Scaling
+
+When traffic increases, a single server may no longer be sufficient.
+
+There are two basic approaches:
+
+### Vertical Scaling
+
+Increase the power of the existing server:
+
+**More CPU + More RAM + Better Hardware**
+
+This is simple but has physical and cost limitations.
+
+### Horizontal Scaling
+
+Instead of using one powerful server, run multiple servers:
+
+**Server 1 + Server 2 + Server 3 + ...**
+
+Now the system can handle more traffic.
+
+But this creates another question:
+
+> How do we distribute incoming requests between these servers?
+
+---
+
+## 3. Load Balancing
+
+A **Load Balancer** distributes incoming requests across multiple servers.
+
+```text
+             Users
+                |
+          Load Balancer
+          /      |      \
+     Server 1 Server 2 Server 3
+```
+
+This improves scalability and can also improve availability because traffic can be redirected if one server becomes unavailable.
+
+---
+
+## 4. Caching
+
+As systems grow, repeatedly retrieving the same data from the database can become expensive and slow.
+
+Caching stores frequently accessed data in a faster storage layer.
+
+```text
+User
+  |
+Application
+  |
+ Cache -----> Database
+```
+
+For example, instead of querying the database every time someone requests popular data, the application can retrieve it from a cache.
+
+This reduces database load and improves response time.
+
+---
+
+## 5. CDN and Edge Computing
+
+As applications become global, another problem appears:
+
+> What if the user is physically far away from our servers?
+
+A **CDN (Content Delivery Network)** can store and serve content from locations closer to users.
+
+Edge computing takes this idea further by performing certain computation closer to the users or data sources, reducing latency for workloads where location matters.
+
+---
+
+## 6. Cloud Computing
+
+Managing physical servers became expensive and difficult as systems grew.
+
+Cloud computing allowed companies to provision computing resources more flexibly instead of maintaining all infrastructure themselves.
+
+Virtualization and cloud platforms made it easier to create, scale, and manage computing resources.
+
+This enabled applications to scale their infrastructure according to their requirements.
+
+---
+
+## 7. Microservices
+
+As applications became larger, a single monolithic application could become difficult for large teams to develop, deploy, and scale.
+
+Microservices introduced another approach:
+
+> Break the application into smaller, independently deployable services.
+
+For example:
+
+```text
+             API Gateway
+          /      |       \
+       Users   Orders   Payments
+        |        |         |
+       DB       DB        DB
+```
+
+Each service can potentially be developed, deployed, and scaled independently.
+
+However, microservices also introduce distributed-system problems such as network failures, service communication, data consistency, and operational complexity. Therefore, microservices are not automatically better than monoliths.
+
+---
+
+## 8. Event-Driven Architecture
+
+As distributed systems became more complex, applications increasingly needed asynchronous communication.
+
+Instead of:
+
+```text
+Service A → Service B → Service C
+```
+
+systems can use events:
+
+```text
+Service A
+    |
+    v
+ Message Broker
+   /       \
+Service B  Service C
+```
+
+This allows services to communicate asynchronously and can reduce coupling between components.
+
+---
+
+## 9. Cloud-Native Architecture
+
+Modern systems combine several architectural approaches:
+
+* Containers
+* Microservices
+* Kubernetes
+* Serverless
+* Event-driven systems
+* Automated CI/CD
+* Observability
+* Cloud infrastructure
+
+The goal is not simply to use more technologies. The goal is to build systems that can be **deployed, scaled, monitored, and changed efficiently**.
+
+---
+
+## 10. AI-Native Systems
+
+Today, AI is becoming another architectural building block.
+
+Modern applications may include:
+
+* Machine-learning models
+* LLMs
+* Vector databases
+* RAG systems
+* Model-serving infrastructure
+* AI agents
+* Inference pipelines
+
+This does not mean traditional architecture disappears. AI systems still need APIs, databases, caching, queues, authentication, scalability, monitoring, and fault tolerance.
+
+AI is becoming another layer of modern system architecture rather than a replacement for everything that came before it.
+
+---
+
+# The Bigger Picture
+
+The evolution of software architecture can be understood as a response to increasing **scale and complexity**.
+
+```text
+Small Application
+       ↓
+Monolith
+       ↓
+More Traffic
+       ↓
+Scaling
+       ↓
+Load Balancing
+       ↓
+Performance Problems
+       ↓
+Caching + CDN
+       ↓
+Global Users
+       ↓
+Cloud Computing
+       ↓
+Growing Application + Teams
+       ↓
+Microservices
+       ↓
+Distributed Communication
+       ↓
+Event-Driven Architecture
+       ↓
+Cloud-Native Systems
+       ↓
+AI-Native Systems
+```
+
+The most important lesson is:
+
+> **There is no single "best" architecture. The right architecture depends on the problems your system needs to solve.**
+
+A small application may be perfectly suited to a monolith, while a large global platform may require distributed services, caching, queues, cloud infrastructure, and edge computing.
+
+System Design is ultimately about understanding these **trade-offs** and choosing the simplest architecture that can satisfy the system's requirements.
