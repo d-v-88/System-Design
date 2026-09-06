@@ -6,7 +6,7 @@ A production-grade, horizontally scalable URL-shortening system designed to gene
 
 ## Architecture Overview
 
-![System Design](./architecture.svg)
+![System Design](./architecture.png)
 
 ## 1. Overview
 
