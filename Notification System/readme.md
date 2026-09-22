@@ -16,7 +16,7 @@ external delivery providers, retry handling, and observability**.
 ## Architecture
 
 ![Notification System
-Architecture](./docs/notification-system-architecture.png)
+Architecture](./architecture.png)
 
 ### High-Level Flow
 
